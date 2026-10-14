@@ -102,7 +102,9 @@ pub fn parse(spec: &CommandSpec, args: &[OsString], posixly: bool) -> Result<Par
     Ok(out)
 }
 
-fn long_candidates<'a>(spec: &'a CommandSpec) -> impl Iterator<Item = (&'static str, OptSpec)> + 'a {
+fn long_candidates<'a>(
+    spec: &'a CommandSpec,
+) -> impl Iterator<Item = (&'static str, OptSpec)> + 'a {
     spec.options
         .iter()
         .filter_map(|o| o.long.map(|l| (l, *o)))
@@ -232,7 +234,8 @@ fn parse_short_cluster(
             }),
             ArgKind::Optional => {
                 // ค่าต้องติดกับตัว option เท่านั้น
-                let value = (!cluster.is_empty()).then(|| OsStr::from_bytes(cluster).to_os_string());
+                let value =
+                    (!cluster.is_empty()).then(|| OsStr::from_bytes(cluster).to_os_string());
                 out.items.push(Item { id: opt.id, value });
                 return Ok(());
             }
@@ -344,7 +347,10 @@ mod tests {
 
     #[test]
     fn error_messages_match_glibc() {
-        assert_eq!(usage(parse(&SPEC, &a(&["-z"]), false)), "invalid option -- 'z'");
+        assert_eq!(
+            usage(parse(&SPEC, &a(&["-z"]), false)),
+            "invalid option -- 'z'"
+        );
         assert_eq!(
             usage(parse(&SPEC, &a(&["--nope=1"]), false)),
             "unrecognized option '--nope=1'"
@@ -365,8 +371,16 @@ mod tests {
 
     #[test]
     fn help_and_version() {
-        assert_eq!(parse(&SPEC, &a(&["-a", "--help"]), false).unwrap_err(), ParseError::Help);
-        assert_eq!(parse(&SPEC, &a(&["--vers"]), false).unwrap_err(), ParseError::Version);
-        assert!(usage(parse(&SPEC, &a(&["--help=x"]), false)).contains("doesn't allow an argument"));
+        assert_eq!(
+            parse(&SPEC, &a(&["-a", "--help"]), false).unwrap_err(),
+            ParseError::Help
+        );
+        assert_eq!(
+            parse(&SPEC, &a(&["--vers"]), false).unwrap_err(),
+            ParseError::Version
+        );
+        assert!(
+            usage(parse(&SPEC, &a(&["--help=x"]), false)).contains("doesn't allow an argument")
+        );
     }
 }

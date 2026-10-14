@@ -202,7 +202,11 @@ impl CommandSpec {
             if o.arg == ArgKind::None && !o.value_name.is_empty() {
                 problems.push(format!("{n}: option '{}' ไม่รับค่าแต่มี value_name", o.id));
             }
-            if o.id == "help" || o.id == "version" || o.long == Some("help") || o.long == Some("version") {
+            if o.id == "help"
+                || o.id == "version"
+                || o.long == Some("help")
+                || o.long == Some("version")
+            {
                 problems.push(format!("{n}: '{}' ชนกับ --help/--version ที่ระบบเติมให้", o.id));
             }
             // alias ที่ id เดียวกันต้องมี arg kind เหมือนกัน; ชื่อสั้น/ยาวห้ามซ้ำข้าม id

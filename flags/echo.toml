@@ -1,0 +1,24 @@
+# flag ของ echo ตาม man page (GNU coreutils)
+# status: todo | partial | done | n/a  (n/a ต้องมี note)
+command = "echo"
+reference = "man echo (GNU coreutils)"
+
+[[flag]]
+name = "-n"
+status = "done"
+
+[[flag]]
+name = "-e"
+status = "done"
+
+[[flag]]
+name = "-E"
+status = "done"
+
+[[flag]]
+name = "--help"
+status = "done"
+
+[[flag]]
+name = "--version"
+status = "done"

@@ -1,0 +1,11 @@
+# help เป็นคำสั่งของ L110 เอง ไม่มี man page ของ GNU ให้เทียบ
+command = "help"
+reference = "L110 (PLAN.md section 3.3)"
+
+[[flag]]
+name = "--help"
+status = "done"
+
+[[flag]]
+name = "--version"
+status = "done"

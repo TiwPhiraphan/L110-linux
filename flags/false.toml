@@ -1,0 +1,11 @@
+# flag ของ false ตาม man page (GNU coreutils)
+command = "false"
+reference = "man false (GNU coreutils)"
+
+[[flag]]
+name = "--help"
+status = "done"
+
+[[flag]]
+name = "--version"
+status = "done"

@@ -4,7 +4,7 @@
 //! `--help` หรือ `--version` ซึ่งจะพิมพ์ข้อความแล้ว exit ด้วย status ของคำสั่งนั้น
 //! (`false --help` จึง exit 1)
 
-use l110_core::{Applet, Args, CommandSpec, Ctx, ExitCode, Example, ParseStyle};
+use l110_core::{Applet, Args, CommandSpec, Ctx, Example, ExitCode, ParseStyle};
 
 pub static TRUE_SPEC: CommandSpec = CommandSpec {
     name: "true",

@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+  # golden test ต้องเทียบกับ GNU coreutils จริง; ถ้าไม่พบให้ล้มแทนที่จะข้ามเงียบๆ
+  L110_REQUIRE_GNU: "1"
+
+jobs:
+  test:
+    # ตรึงเวอร์ชัน runner เพื่อให้ GNU coreutils ที่ใช้อ้างอิงคงที่ (ดู docs/reference-versions.md)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        run: |
+          rustup update stable
+          rustup default stable
+          rustup component add rustfmt clippy
+          rustup target add x86_64-unknown-linux-musl
+          rustc --version
+
+      - name: Reference tools
+        run: /usr/bin/echo --version | head -1
+
+      - name: Format
+        run: cargo fmt --all -- --check
+
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: Test (unit, integration, golden vs GNU)
+        run: cargo test --workspace
+
+      - name: Flag coverage (must not decrease)
+        run: cargo xtask coverage --check
+
+      - name: Build static release binary (musl)
+        run: cargo build --release --target x86_64-unknown-linux-musl -p l110
+
+      - name: Verify binary is static and runs
+        run: |
+          bin=target/x86_64-unknown-linux-musl/release/l110
+          file "$bin"
+          file "$bin" | grep -Eq 'statically linked|static-pie linked'
+          "$bin" echo "L110 ok"
+          "$bin" --list

@@ -47,14 +47,21 @@ pub fn render_help(spec: &CommandSpec) -> String {
         .map(|o| (left_column(o), o.help))
         .collect();
 
-    let widest = rows.iter().map(|(l, _)| l.chars().count()).max().unwrap_or(0);
+    let widest = rows
+        .iter()
+        .map(|(l, _)| l.chars().count())
+        .max()
+        .unwrap_or(0);
     let help_col = (widest + 2).min(MAX_HELP_COL);
 
     s.push('\n');
     for (left, help) in &rows {
         let left_len = left.chars().count();
         let (first_prefix, rest_indent) = if left_len + 2 <= help_col {
-            (format!("{left}{}", " ".repeat(help_col - left_len)), help_col)
+            (
+                format!("{left}{}", " ".repeat(help_col - left_len)),
+                help_col,
+            )
         } else {
             s.push_str(left);
             s.push('\n');
@@ -171,8 +178,14 @@ mod tests {
         assert!(h.contains("  -w, --width=COLS"), "{h}");
         assert!(h.contains("      --color[=WHEN]"), "{h}");
         assert!(h.contains("  -s[UNIT]"), "{h}");
-        assert!(h.contains("      --help          display this help and exit\n"), "{h}");
-        assert!(h.contains("      --version       output version information and exit\n"), "{h}");
+        assert!(
+            h.contains("      --help          display this help and exit\n"),
+            "{h}"
+        );
+        assert!(
+            h.contains("      --version       output version information and exit\n"),
+            "{h}"
+        );
         assert!(h.contains("\nExamples:\n  demo -a file\n      show all of file\n"));
         assert!(h.ends_with("Exit status: 0 on success.\n"));
     }

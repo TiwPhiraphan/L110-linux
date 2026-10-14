@@ -70,6 +70,9 @@ mod tests {
     #[test]
     fn io_context() {
         let e = io::Error::from_raw_os_error(13);
-        assert_eq!(CmdError::io("cannot open 'x'", &e).message, "cannot open 'x': Permission denied");
+        assert_eq!(
+            CmdError::io("cannot open 'x'", &e).message,
+            "cannot open 'x': Permission denied"
+        );
     }
 }

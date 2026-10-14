@@ -115,7 +115,9 @@ impl Ctx {
     /// พิมพ์ข้อความใช้ผิดวิธีพร้อม `Try '... --help'` แล้วคืน exit code ตาม spec
     pub fn usage_error(&mut self, spec: &CommandSpec, msg: impl std::fmt::Display) -> ExitCode {
         self.error(msg);
-        let _ = self.err.write_all(help::try_help_line(&self.prog).as_bytes());
+        let _ = self
+            .err
+            .write_all(help::try_help_line(&self.prog).as_bytes());
         ExitCode(spec.usage_status)
     }
 

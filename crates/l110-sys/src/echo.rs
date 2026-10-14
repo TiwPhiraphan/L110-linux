@@ -34,7 +34,12 @@ If -e is in effect, the following sequences are recognized:
   \\xHH    byte with hexadecimal value HH (1 to 2 digits)",
     options: &[
         OptSpec::flag("n", Some('n'), None, "do not output the trailing newline"),
-        OptSpec::flag("e", Some('e'), None, "enable interpretation of backslash escapes"),
+        OptSpec::flag(
+            "e",
+            Some('e'),
+            None,
+            "enable interpretation of backslash escapes",
+        ),
         OptSpec::flag(
             "E",
             Some('E'),

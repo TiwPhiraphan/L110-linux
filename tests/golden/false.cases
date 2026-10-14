@@ -1,0 +1,10 @@
+false
+false a b c
+false --bogus
+false -x
+false --help extra
+false extra --help
+false --version extra
+false ''
+~ false --help
+~ false --version

@@ -1,0 +1,70 @@
+# พื้นฐาน
+echo
+echo hello
+echo hello world
+echo 'a   b' c
+echo ''
+echo '' ''
+# -n
+echo -n
+echo -n hello
+echo -n -n hello
+echo -nn hello
+# -e / -E
+echo -e 'a\tb\nc'
+echo -e 'back\\slash'
+echo -e 'bell\abs\bff\fcr\rvt\v'
+echo -e 'esc\e[0m'
+echo -e 'stop\cnever shown'
+echo -e 'x\cy' z
+echo -n -e 'x\cy'
+echo -e '\x41\x4a\x4A'
+echo -e '\x4'
+echo -e '\xZ'
+echo -e '\x'
+echo -e '\0101'
+echo -e '\101'
+echo -e '\1'
+echo -e '\0'
+echo -e '\08'
+echo -e '\1234'
+echo -e '\q'
+echo -e 'end\'
+echo -E 'a\tb'
+echo -e -E 'a\tb'
+echo -E -e 'a\tb'
+echo -eE 'a\tb'
+echo -Ee 'a\tb'
+echo -neE 'a\nb'
+# ไม่ถือเป็น option
+echo -
+echo --
+echo -x
+echo -nx hello
+echo -n -x hello
+echo -en hello
+echo -ne 'a\nb'
+echo hello -n
+echo -- -n
+echo -e -- 'a\tb'
+echo ---
+echo -e --x
+# --help / --version ต้องเป็น argument เดียวเท่านั้น
+echo --help x
+echo x --help
+echo --version x
+echo --help --version
+echo -n --help
+~ echo --help
+~ echo --version
+# POSIXLY_CORRECT
+POSIXLY_CORRECT=1 echo -e hello
+POSIXLY_CORRECT=1 echo -n hello
+POSIXLY_CORRECT=1 echo -n -e 'a\tb'
+POSIXLY_CORRECT=1 echo 'a\tb'
+POSIXLY_CORRECT=1 echo -E 'a\tb'
+POSIXLY_CORRECT=1 echo 'x\cy' z
+POSIXLY_CORRECT=1 echo --help
+POSIXLY_CORRECT=1 echo --version
+POSIXLY_CORRECT=1 echo -ne hello
+POSIXLY_CORRECT= echo -e hello

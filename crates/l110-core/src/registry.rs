@@ -75,10 +75,7 @@ impl Registry {
         }
         for a in &applets {
             if a.name != a.spec.name {
-                return Err(format!(
-                    "applet '{}' ใช้ spec ของ '{}'",
-                    a.name, a.spec.name
-                ));
+                return Err(format!("applet '{}' ใช้ spec ของ '{}'", a.name, a.spec.name));
             }
         }
         Ok(Self { applets })

@@ -1,0 +1,5 @@
+# ความครอบคลุมขั้นต่ำต่อคำสั่ง (หน่วย %) ปรับด้วย: cargo xtask coverage --update
+echo 100.00
+false 100.00
+help 100.00
+true 100.00

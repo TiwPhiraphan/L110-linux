@@ -113,7 +113,9 @@ pub fn run(ctx: &mut Ctx, args: Args) -> ExitCode {
 
     // l110 APPLET [ARGUMENT]...
     let mut operands = parsed.operands.into_iter();
-    let first = operands.next().expect("operand follows after option parsing");
+    let first = operands
+        .next()
+        .expect("operand follows after option parsing");
     let target = applet_name(&first);
     match reg.find(&target) {
         Some(applet) => {
@@ -140,7 +142,10 @@ mod tests {
 
     #[test]
     fn dispatch_by_argv0_and_by_argument() {
-        assert_eq!(run_main("/bin/echo", &["a", "b"]), (ExitCode(0), "a b\n".into(), "".into()));
+        assert_eq!(
+            run_main("/bin/echo", &["a", "b"]),
+            (ExitCode(0), "a b\n".into(), "".into())
+        );
         assert_eq!(run_main("l110", &["echo", "-n", "x"]).1, "x");
         assert_eq!(run_main("-false", &[]).0, ExitCode(1));
         assert_eq!(run_main("/usr/bin/l110", &["true"]).0, ExitCode(0));
@@ -149,7 +154,10 @@ mod tests {
     #[test]
     fn unknown_applet_is_127() {
         let (c, o, e) = run_main("nonesuch", &[]);
-        assert_eq!((c, o.as_str(), e.as_str()), (ExitCode(127), "", "nonesuch: applet not found\n"));
+        assert_eq!(
+            (c, o.as_str(), e.as_str()),
+            (ExitCode(127), "", "nonesuch: applet not found\n")
+        );
         let (c, _, e) = run_main("l110", &["nonesuch"]);
         assert_eq!(c, ExitCode(127));
         assert_eq!(e, "l110: applet not found: nonesuch\n");
@@ -173,7 +181,11 @@ mod tests {
         }
         assert!(run_main("l110", &["--help"]).1.starts_with("Usage: l110 "));
         assert!(run_main("l110", &[]).1.starts_with("Usage: l110 "));
-        assert!(run_main("l110", &["--version"]).1.starts_with("l110 (L110) "));
+        assert!(
+            run_main("l110", &["--version"])
+                .1
+                .starts_with("l110 (L110) ")
+        );
     }
 
     /// ทุก applet ต้องมี spec/คำอธิบาย/ตัวอย่างครบ และ `--help` ต้องใช้ได้จริง

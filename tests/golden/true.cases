@@ -1,0 +1,10 @@
+true
+true a b c
+true --bogus
+true -x
+true --help extra
+true extra --help
+true --version extra
+true ''
+~ true --help
+~ true --version

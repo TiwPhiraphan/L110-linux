@@ -1,0 +1,11 @@
+# flag ของ true ตาม man page (GNU coreutils)
+command = "true"
+reference = "man true (GNU coreutils)"
+
+[[flag]]
+name = "--help"
+status = "done"
+
+[[flag]]
+name = "--version"
+status = "done"
