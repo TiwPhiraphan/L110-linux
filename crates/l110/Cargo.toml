@@ -1,0 +1,22 @@
+[package]
+name = "l110"
+description = "L110 multi-call binary: dispatches to applets by argv[0]"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[lib]
+name = "l110"
+path = "src/lib.rs"
+
+[[bin]]
+name = "l110"
+path = "src/main.rs"
+
+[dependencies]
+l110-core.workspace = true
+l110-sys.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,37 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/l110-core",
+    "crates/l110-sys",
+    "crates/l110",
+    "xtask",
+]
+default-members = [
+    "crates/l110-core",
+    "crates/l110-sys",
+    "crates/l110",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+
+[workspace.dependencies]
+l110-core = { path = "crates/l110-core" }
+l110-sys = { path = "crates/l110-sys" }
+l110 = { path = "crates/l110" }
+
+[workspace.lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

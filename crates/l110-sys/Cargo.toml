@@ -1,0 +1,13 @@
+[package]
+name = "l110-sys"
+description = "L110 system/info commands (echo, true, false, ...)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+l110-core.workspace = true
+
+[lints]
+workspace = true
